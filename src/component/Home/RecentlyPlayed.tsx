@@ -6,6 +6,7 @@ import { setPlaylist } from "../../slice/playerSlice";
 
 import SongItem from "./SongItem";
 import { useEffect } from "react";
+import LoadingDiv from "../loading/LoadingDiv";
 
 const RecentlyPlayed = ({ user }: any) => {
   const dispatch = useDispatch();
@@ -19,14 +20,13 @@ const RecentlyPlayed = ({ user }: any) => {
   }, [listenhistory?.data, dispatch]);
   return (
     <>
-      {isLoading && <LoadingOverlay />}
       <div className=" mt-10 flex items-center">
         <h2 className="text-xl font-semibold mb-4 ">Recently Played</h2>
         <Link to="test" className="ml-auto">
           see all
         </Link>
       </div>
-
+      {isLoading && <LoadingDiv />}
       <div className="grid grid-cols-4 gap-4">
         {listenhistory?.data?.map((item: any) => {
           return <SongItem item={item} key={item?.id} user={user} />;

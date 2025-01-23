@@ -21,7 +21,6 @@ const Login = () => {
     };
     const dataen = JSON.stringify(datade);
     const { encryptedData, iv }: any = encryptData(dataen);
-    console.log({ data: encryptedData, iv: iv });
 
     login({ data: encryptedData, iv: iv })
       .unwrap()
@@ -35,10 +34,10 @@ const Login = () => {
         localStorage.setItem("user", JSON.stringify(user));
         if (decryptdata?.role == 0) {
           await pause(1000);
-          navigate("/admin");
+          window.location.href=("/admin");
         } else if (decryptdata?.role == 1) {
           await pause(1000);
-          navigate("/");
+          window.location.href=("/");
         }
       })
       .catch((error) => {

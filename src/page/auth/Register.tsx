@@ -4,6 +4,7 @@ import { Button, message } from "antd";
 import { pause } from "../../util/pause";
 import { useNavigate } from "react-router-dom";
 import { CloseOutlined } from "@ant-design/icons";
+import { encryptData } from "../../util/crypto";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faTimes } from '@fortawesome/free-solid-svg-icons';
 const Register = () => {
@@ -15,13 +16,14 @@ const Register = () => {
   const navigate = useNavigate();
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    register({
+    const data = {
       email: email,
       password: pass,
-      name: name,
-      address: "",
-      image: "",
-    })
+      username: name,
+    };
+    const dataen = JSON.stringify(data);
+    const { encryptedData, iv }: any = await encryptData(dataen);
+    register({ data: encryptedData, iv: iv })
       .unwrap()
       .then(async () => {
         messageApi.open({
@@ -72,11 +74,9 @@ const Register = () => {
           </h1>
           <form className="form" onSubmit={onSubmit}>
             <div className="form-group">
-              <label htmlFor="name"> Name</label>
+              <label> Username</label>
               <input
                 type="text"
-                id="email"
-                name="email"
                 onChange={(e: any) => setname(e.target.value)}
               />
             </div>
@@ -93,14 +93,14 @@ const Register = () => {
               <label htmlFor="password"> Password</label>
               <input
                 type="password"
-                id="email"
-                name="email"
+                id="password"
+                name="password"
                 onChange={(e: any) => setpass(e.target.value)}
               />
             </div>
             <div className="form-group">
               <label htmlFor="password">Confirm Password</label>
-              <input type="password" id="email" name="email" />
+              <input type="password" id="password" name="password" />
             </div>
             <Button
               className="p-2 bg-slate-800 border-none text-white"

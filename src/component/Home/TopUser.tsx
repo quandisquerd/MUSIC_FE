@@ -39,7 +39,7 @@ const TopUser = ({ item, user }: any) => {
       className="flex items-center space-x-4 p-2 bg-white rounded-lg shadow-lg w-full"
     >
       {adding && <LoadingOverlay />}
-      {isLoading && <LoadingOverlay />}
+      {/* {isLoading && <LoadingOverlay />} */}
       {uning && <LoadingOverlay />}
       {contextHolder}
       <div className="flex items-center space-x-4 flex-grow">

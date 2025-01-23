@@ -6,6 +6,7 @@ import LoadingOverlay from "../loading/Loading";
 import { useDispatch } from "react-redux";
 import { setPlaylist } from "../../slice/playerSlice";
 import SongItem from "./SongItem";
+import LoadingDiv from "../loading/LoadingDiv";
 
 const Morelike = ({ user }: any) => {
   const dispatch = useDispatch();
@@ -20,14 +21,13 @@ const Morelike = ({ user }: any) => {
 
   return (
     <>
-      {isLoading && <LoadingOverlay />}
       <div className=" mt-10 flex items-center">
         <h2 className="text-xl font-semibold mb-4 ">More of what you like</h2>
         <Link to="test" className="ml-auto">
           see all
         </Link>
       </div>
-
+      {isLoading && <LoadingDiv />}
       <div className="grid grid-cols-4 gap-4">
         {listenhistory?.data?.map((item: any) => {
           return <SongItem item={item} key={item?.id} user={user} />;
