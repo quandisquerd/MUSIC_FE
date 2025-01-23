@@ -24,6 +24,7 @@ import {
   StepForwardOutlined,
   UsergroupAddOutlined,
 } from "@ant-design/icons";
+import Test from "../test";
 
 const MusicPlayerBar = memo(({ user }: any) => {
   const dispatch = useDispatch();
@@ -72,7 +73,7 @@ const MusicPlayerBar = memo(({ user }: any) => {
 
   return (
     <>
-      {checking && <LoadingOverlay />}
+      {/* {checking && <LoadingOverlay />} */}
       {contextHolder}
       <div className=" fixed bottom-0 left-0 right-0 z-50 bg-gray-200   px-4  text-black border-t shadow-lg">
         <div className="ml-32 mr-32 flex items-center justify-between">
@@ -104,6 +105,7 @@ const MusicPlayerBar = memo(({ user }: any) => {
             <span className="text-sm text-orange-500">
               {formatTime(currentTimes ? currentTimes : 0)}
             </span>
+            
             <WaveFormMini
               status={isPlaying}
               onDuration={Duration}

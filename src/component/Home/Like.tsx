@@ -5,16 +5,18 @@ import {
 } from "@ant-design/icons";
 import { useGetAllFavoriteWithUserQuery } from "../../api/music";
 import LoadingOverlay from "../loading/Loading";
+import LoadingUser from "../loading/LoadingUser";
 const Like = ({ user }: any) => {
   const { data: ListFavoriteUser, isLoading: favoriting } =
     useGetAllFavoriteWithUserQuery(user?.token);
   return (
     <>
-      {favoriting && <LoadingOverlay />}
+      {/* {favoriting && <LoadingOverlay />} */}
       <div className="mt-8">
         <h3 className="text-xl font-semibold mb-4">
           {ListFavoriteUser?.data?.length} Likes
         </h3>
+        {favoriting && <LoadingUser />}
         <ul className="space-y-4">
           {ListFavoriteUser?.data?.map((item: any) => {
             return (
@@ -30,7 +32,7 @@ const Like = ({ user }: any) => {
                 <div>
                   <p className="font-semibold text-sl">
                     {item?.Music?.name?.length > 25
-                      ? item?.Music?.name.slice(0, ) + `...`
+                      ? item?.Music?.name.slice(0) + `...`
                       : item?.Music?.name}
                   </p>
                   <p className="text-sl text-gray-500">

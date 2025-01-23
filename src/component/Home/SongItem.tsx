@@ -28,8 +28,8 @@ const SongItem = ({ item, user }: any) => {
       className="bg-white shadow-lg rounded-lg  justify-between h-full overflow-hidden relative group flex flex-col"
       key={item?.id}
     >
-      {updating && <LoadingOverlay />}
-      {adding && <LoadingOverlay />}
+      {/* {updating && <LoadingOverlay />}
+      {adding && <LoadingOverlay />} */}
       <img
         src={item?.Music?.image}
         alt="Track 1"
