@@ -6,6 +6,8 @@ import {
 } from "../../api/music";
 import LoadingOverlay from "../loading/Loading";
 import { message } from "antd";
+import LoadingDiv from "../loading/LoadingDiv";
+import LoadingUser from "../loading/LoadingUser";
 
 const TopUser = ({ item, user }: any) => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -38,9 +40,6 @@ const TopUser = ({ item, user }: any) => {
       key={item?.id}
       className="flex items-center space-x-4 p-2 bg-white rounded-lg shadow-lg w-full"
     >
-      {adding && <LoadingOverlay />}
-      {/* {isLoading && <LoadingOverlay />} */}
-      {uning && <LoadingOverlay />}
       {contextHolder}
       <div className="flex items-center space-x-4 flex-grow">
         <div>

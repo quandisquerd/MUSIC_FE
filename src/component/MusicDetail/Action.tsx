@@ -14,29 +14,63 @@ import { useState } from "react";
 import { useAddCommentMutation } from "../../api/musicDetail";
 import { useParams } from "react-router-dom";
 import { message } from "antd";
-import LoadingOverlay from "../loading/Loading";
+import LoadingDiv from "../loading/LoadingDiv";
+import {
+  useAddFavoriteSongMutation,
+  useCheckFavoriteSongWithUserQuery,
+  useRemoveFavoriteSongMutation,
+} from "../../api/music";
 
 const Action = ({ user, data, users }: any) => {
   const [messageApi, contextHolder] = message.useMessage();
   const { id } = useParams();
   const [value, setValue] = useState<any>();
   const [cmt, { isLoading }] = useAddCommentMutation();
+  const [addFavorite] = useAddFavoriteSongMutation();
+  const { data: checkFavoriteSong, isLoading: checking } =
+    useCheckFavoriteSongWithUserQuery({
+      id: id,
+      token: users?.token,
+    });
+  const [removeFavorite] = useRemoveFavoriteSongMutation();
   const HandleComment = () => {
     cmt({ data: { title: value, songid: id }, token: users?.token })
       .unwrap()
       .then((res: any) => {
         messageApi.success(res?.message);
-        setValue("")
+        setValue("");
       })
       .catch((error) => {
         messageApi.error(error?.message);
       });
   };
-
+  console.log(users?.token, checkFavoriteSong);
+  const HandleLike = () => {
+    const data = {
+      songId: id,
+    };
+    addFavorite({ data, token: users?.token })
+      .then((res: any) => {
+        messageApi.success(res?.data?.message);
+      })
+      .catch((error: any) => {
+        messageApi.error(error?.data?.message);
+      });
+  };
+  const HandleUnLike = () => {
+    removeFavorite({ id: id, token: users?.token })
+      .then((res: any) => {
+        messageApi.success(res?.data?.message);
+      })
+      .catch((error: any) => {
+        messageApi.error(error?.data?.message);
+      });
+  };
   return (
     <div className="flex">
       {contextHolder}
-      {isLoading && <LoadingOverlay/>}
+      {isLoading && <LoadingDiv />}
+      {checking && <LoadingDiv />}
       <div className="w-4/5 p-4 border bg-white ">
         <div className="flex items-center justify-center mb-4">
           <img
@@ -57,7 +91,6 @@ const Action = ({ user, data, users }: any) => {
           />
           <button
             className="text-black  w-10 h-10 border text-xl rounded-full flex items-center justify-center"
-        
             onClick={() => HandleComment()}
           >
             <SendOutlined className=" ml-1 " />
@@ -65,10 +98,24 @@ const Action = ({ user, data, users }: any) => {
         </div>
         <div className="flex items-center justify-center">
           <div className="w-2/3 flex items-center ">
-            <button className="text-orange-500 font-semibold mr-2 border py-1 px-3 text-sm flex justify-center items-center">
-              <HeartFilled className="mr-1 mb-0.5" />
-              Liked
-            </button>
+            {checkFavoriteSong?.status ? (
+              <button className="text-orange-500 font-semibold mr-2 border py-1 px-3 text-sm flex justify-center items-center">
+                <HeartFilled
+                  className="mr-1 mb-0.5"
+                  onClick={() => HandleUnLike()}
+                />
+                Liked
+              </button>
+            ) : (
+              <button className="text-black font-semibold mr-2 border py-1 px-3 text-sm flex justify-center items-center">
+                <HeartFilled
+                  className="mr-1 mb-0.5"
+                  onClick={() => HandleLike()}
+                />
+                Like
+              </button>
+            )}
+
             <button className="mr-2 border py-1 px-3 text-black text-sm flex justify-center items-center">
               <RetweetOutlined className="mr-1 mb-0.5 text-sm" />
               Repost

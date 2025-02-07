@@ -1,10 +1,10 @@
 
 import UploadMusic from './UploadMusic'
 
-const AddMusic = ({user}: any) => {
+const AddMusic = ({user,users }: any) => {
   return (
     <div>
-        <UploadMusic user={user}/>
+        <UploadMusic user={user} users={users}/>
     </div>
   )
 }
