@@ -20,12 +20,12 @@ const WebsiteLayout = ({ user }: any) => {
   return (
     <>
       <header className=" fixed top-0 left-0 right-0 z-50  bg-black ">
-        <div className="flex items-center justify-between bg-gray-800 px-4 py-2 text-white mr-32 ml-32">
+        <div className="flex items-center justify-between bg-gray-800 px-4  text-white mr-32 ml-32">
           <div className="flex items-center space-x-4">
             <img
-              src="https://res.cloudinary.com/dlhdt9pla/image/upload/v1733339658/download_xidgkk.png"
+              src="https://res.cloudinary.com/daqolzo0n/image/upload/v1738920184/DALL_E_2025-02-06_21.14.11_-_A_modern_and_minimalist_music_streaming_logo_k9uv0h.png"
               alt="Logo"
-              className="h-6 "
+              className="h-14 "
             />
             <Link
               to=""

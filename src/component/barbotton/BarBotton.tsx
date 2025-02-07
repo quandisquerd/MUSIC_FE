@@ -4,13 +4,12 @@ import WaveFormMini from "../waveform/WaveFormMini";
 import { formatTime } from "../../util/formatTime";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { togglePlayPause, nextSong, prevSong } from "../../slice/playerSlice";
+import { togglePlayPause, nextSong, prevSong, setDuration } from "../../slice/playerSlice";
 import {
   useAddFavoriteSongMutation,
   useCheckFavoriteSongWithUserQuery,
   useRemoveFavoriteSongMutation,
 } from "../../api/music";
-import LoadingOverlay from "../loading/Loading";
 import { message } from "antd";
 import {
   CaretRightOutlined,
@@ -24,13 +23,11 @@ import {
   StepForwardOutlined,
   UsergroupAddOutlined,
 } from "@ant-design/icons";
-import Test from "../test";
 
 const MusicPlayerBar = memo(({ user }: any) => {
   const dispatch = useDispatch();
 
-  const { currentSong, isPlaying } = useSelector((state: any) => state?.player);
-  console.log(currentSong);
+  const { currentSong, isPlaying ,currentIndex} = useSelector((state: any) => state?.player);
   const [messageApi, contextHolder] = message.useMessage();
   const { data: checkFavoriteSong, isLoading: checking } =
     useCheckFavoriteSongWithUserQuery({
@@ -41,12 +38,14 @@ const MusicPlayerBar = memo(({ user }: any) => {
   const [addFavorite] = useAddFavoriteSongMutation();
   const [removeFavorite] = useRemoveFavoriteSongMutation();
   const [currentTimes, setCurrentTime] = useState();
-  const [durations, setDuration] = useState();
+  const [durations, setDurations] = useState();
   const Duration = (value: any) => {
-    setDuration(value);
+    dispatch(setDuration(value))
+    setDurations(value);
   };
   const Current = (value: any) => {
     setCurrentTime(value);
+   
   };
   const HandleLike = () => {
     const data = {
@@ -69,7 +68,6 @@ const MusicPlayerBar = memo(({ user }: any) => {
         messageApi.error(error?.data?.message);
       });
   };
-  console.log();
 
   return (
     <>

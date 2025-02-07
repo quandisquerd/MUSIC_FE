@@ -7,6 +7,7 @@ import genreApi from "../api/genre";
 import historyApi from "../api/history";
 import playerReducer from "../slice/playerSlice"
 import musicdetailApi from "../api/musicDetail";
+import { cloudinaryApi } from "../api/uploadFile";
 
 const rootReducer = combineReducers({
   [musicApi.reducerPath]: musicApi.reducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   [genreApi.reducerPath]: genreApi.reducer,
   [historyApi.reducerPath]: historyApi.reducer,
   [musicdetailApi.reducerPath]: musicdetailApi.reducer,
+  [cloudinaryApi.reducerPath] : cloudinaryApi.reducer,
   player: playerReducer,
 });
 const middleReducer = [
@@ -25,7 +27,8 @@ const middleReducer = [
   waveformApi.middleware,
   genreApi.middleware,
   historyApi.middleware,
-  musicdetailApi.middleware
+  musicdetailApi.middleware,
+  cloudinaryApi.middleware,
 ];
 export const store = configureStore({
   reducer: rootReducer,

@@ -43,7 +43,7 @@ const SongItem = ({ item, user }: any) => {
       </div>
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
         <button className="bg-orange-600 mb-20 text-white p-2 rounded-full opacity-75 hover:opacity-100 transform scale-110 hover:scale-125 transition-all z-10">
-          {currentSong?.Music?.id === item?.Music?.id ? (
+          {currentSong?.Music?.id == item?.Music?.id ? (
             isPlaying ? (
               <PauseOutlined
                 className="w-8 h-8 flex items-center justify-center pl-0.5 text-2xl"

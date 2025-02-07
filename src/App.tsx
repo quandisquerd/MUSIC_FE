@@ -68,7 +68,7 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/upload" element={<AddMusic user={user} />} />
+          <Route path="/upload" element={<AddMusic user={user} users={userDe}/>} />
         </Routes>
       </Router>
     </>

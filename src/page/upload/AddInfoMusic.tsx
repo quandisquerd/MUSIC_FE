@@ -6,7 +6,7 @@ import LoadingOverlay from "../../component/loading/Loading";
 import { useAddMusicMutation } from "../../api/music";
 import { useNavigate } from "react-router-dom";
 
-const AddInfoMusic = ({ filename, user, file }: any) => {
+const AddInfoMusic = ({ filename, user, file,users }: any) => {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const [trackTitle, setTrackTitle] = useState("");
@@ -21,8 +21,10 @@ const AddInfoMusic = ({ filename, user, file }: any) => {
     setValue(e.target.value);
   };
 
+  
+
   const props: any = {
-    action: "https://api.cloudinary.com/v1_1/dlhdt9pla/auto/upload",
+    action: `https://api.cloudinary.com/v1_1/${users?.cloudname}/auto/upload`,
     onChange({ file }: any) {
       if (file.status !== "uploading") {
         // Sử dụng một hàm setState để cập nhật mảng uploadedImages
@@ -30,7 +32,7 @@ const AddInfoMusic = ({ filename, user, file }: any) => {
       }
     },
     data: {
-      upload_preset: "ml_upload",
+      upload_preset: `${users?.upload_preset}`,
       folder: "IMAGE",
     },
   };
@@ -88,7 +90,6 @@ const AddInfoMusic = ({ filename, user, file }: any) => {
                   {...props}
                   multiple
                   accept=".png, .jpg, .jpeg"
-                  className=""
                 >
                   <PlusOutlined className="flex items-center justify-center text-6xl font-light" />
                   <p className="text-gray-400 text-xl ">Add new artwork</p>

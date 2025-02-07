@@ -6,6 +6,7 @@ import LoadingOverlay from "../../component/loading/Loading";
 import { useEffect } from "react";
 import { playSong } from "../../slice/playerSlice";
 import Action from "../../component/MusicDetail/Action";
+import LoadingDiv from "../../component/loading/LoadingDiv";
 
 
 const MusicDetail = ({user,users}:any) => {
@@ -24,7 +25,7 @@ const MusicDetail = ({user,users}:any) => {
 
   return (
     <div className="mr-32 ml-32">
-      {musicing && <LoadingOverlay />}
+      {musicing && <LoadingDiv />}
       <div className=" mt-12 max-w-full text-xs font-bold bg-white text-white  items-center justify-center">
         <Waveform isPlaying={isPlaying} />
       </div>
