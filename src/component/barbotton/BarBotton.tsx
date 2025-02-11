@@ -129,7 +129,7 @@ const MusicPlayerBar = memo(({ user }: any) => {
                     {currentSong?.User?.username}
                   </p>
                   <p className="text-xs text-gray-600">
-                    {currentSong?.Music?.name}
+                  {currentSong?.Music?.name?.length > 20 ? currentSong?.Music?.name?.slice(0,20) : currentSong?.Music?.name }
                   </p>
                 </div>
               </div>

@@ -37,7 +37,7 @@ const SongItem = ({ item, user }: any) => {
       />
       <div className="p-4 flex-grow">
         <div>
-          <h3 className="font-semibold text-sm">{item?.Music?.name}</h3>
+          <h3 className="font-semibold text-sm">{item?.Music?.name?.length > 20 ? item?.Music?.name?.slice(0,20) : item?.Music?.name }</h3>
           <p className="text-xs text-gray-500">{item?.User?.username}</p>
         </div>
       </div>
