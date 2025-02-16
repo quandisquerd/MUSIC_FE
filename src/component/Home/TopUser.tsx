@@ -4,16 +4,14 @@ import {
   useCheckFollowQuery,
   useUnFollowMutation,
 } from "../../api/music";
-import LoadingOverlay from "../loading/Loading";
 import { message } from "antd";
-import LoadingDiv from "../loading/LoadingDiv";
-import LoadingUser from "../loading/LoadingUser";
+
 
 const TopUser = ({ item, user }: any) => {
   const [messageApi, contextHolder] = message.useMessage();
-  const [addFollow, { isLoading: adding }] = useAddFollowMutation();
-  const [unFollow, { isLoading: uning }] = useUnFollowMutation();
-  const { data: checkFolow, isLoading } = useCheckFollowQuery({
+  const [addFollow] = useAddFollowMutation();
+  const [unFollow] = useUnFollowMutation();
+  const { data: checkFolow } = useCheckFollowQuery({
     id: item?.id,
     token: user?.token,
   });

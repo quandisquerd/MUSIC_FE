@@ -1,7 +1,6 @@
 import { useGetTopPlayMusicQuery } from "../../api/music";
 import { Link } from "react-router-dom";
 import SongItem from "./SongItem";
-import { Skeleton } from "antd";
 import LoadingDiv from "../loading/LoadingDiv";
 
 const Youlike = ({ user }: any) => {

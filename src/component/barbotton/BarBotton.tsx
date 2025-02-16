@@ -27,9 +27,9 @@ import {
 const MusicPlayerBar = memo(({ user }: any) => {
   const dispatch = useDispatch();
 
-  const { currentSong, isPlaying ,currentIndex} = useSelector((state: any) => state?.player);
+  const { currentSong, isPlaying } = useSelector((state: any) => state?.player);
   const [messageApi, contextHolder] = message.useMessage();
-  const { data: checkFavoriteSong, isLoading: checking } =
+  const { data: checkFavoriteSong } =
     useCheckFavoriteSongWithUserQuery({
       id: currentSong?.Music?.id,
       token: user?.token,
