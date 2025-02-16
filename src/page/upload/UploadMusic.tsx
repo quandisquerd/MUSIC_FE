@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { CloseOutlined } from "@ant-design/icons";
-import { Button, message, Result, Upload } from "antd";
+import { Button, Result, Upload } from "antd";
 import AddInfoMusic from "./AddInfoMusic";
 import { useNavigate } from "react-router-dom";
 import {
-  useCancelUploadMutation,
   useCheckUploadFileUserQuery,
   useUploadFileMutation,
 } from "../../api/uploadFile";
@@ -12,7 +11,6 @@ import LoadingOverlay from "../../component/loading/Loading";
 
 const UploadMusic = ({ user, users }: any) => {
   const navigate = useNavigate();
-  const [messageApi, contextHolder] = message.useMessage();
   const [uploadfile, { isLoading }] = useUploadFileMutation();
   const [uploadedFiles, setUploadedFiles] = useState();
   const [filename, setFileName] = useState();
@@ -51,7 +49,6 @@ const UploadMusic = ({ user, users }: any) => {
   return (
     <div className="flex flex-col items-center bg-gray-50 h-screen">
       {isLoading && <LoadingOverlay user={user} />}
-      {contextHolder}
       {filename ? (
         " "
       ) : (

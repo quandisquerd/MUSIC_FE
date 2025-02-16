@@ -11,7 +11,6 @@ import Add from "./component/admin/Add";
 import WebsiteLayout from "./layout/WebsiteLayout";
 import Login from "./page/auth/Login";
 import Register from "./page/auth/Register";
-import Test from "./component/test";
 import ListGenre from "./page/genre/ListGenre";
 import AddGenre from "./page/genre/AddGenre";
 import UpdateGenre from "./page/genre/UpdateGenre";
@@ -57,7 +56,7 @@ function App() {
           </Route>
           <Route path="/" element={<WebsiteLayout user={user} />}>
             <Route index element={<Home user={user} />} />
-            <Route path="/test" element={<Test />} />
+            {/* <Route path="/test" element={<Test />} /> */}
             <Route path="music">
               <Route
                 path=":id"

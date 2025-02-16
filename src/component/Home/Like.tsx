@@ -4,7 +4,6 @@ import {
   RetweetOutlined,
 } from "@ant-design/icons";
 import { useGetAllFavoriteWithUserQuery } from "../../api/music";
-import LoadingOverlay from "../loading/Loading";
 import LoadingUser from "../loading/LoadingUser";
 const Like = ({ user }: any) => {
   const { data: ListFavoriteUser, isLoading: favoriting } =

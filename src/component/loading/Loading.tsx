@@ -1,5 +1,4 @@
 import { LoadingOutlined } from "@ant-design/icons";
-import React from "react";
 import { useCancelUploadMutation } from "../../api/uploadFile";
 import { message } from "antd";
 
@@ -10,10 +9,12 @@ const LoadingOverlay = ({ user }: any) => {
     cancelUpload(user?.token)
       .unwrap()
       .then((res: any) => {
+        console.log(res);
+        
         messageApi.success("success!");
       })
       .catch((error: any) => {
-        messageApi.error("error!");
+        messageApi.error("error!",error);
       });
   };
   return (

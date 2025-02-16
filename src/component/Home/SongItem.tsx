@@ -4,7 +4,6 @@ import {
   useUpdatePlayMusicMutation,
 } from "../../api/music";
 import { playSong, togglePlayPause } from "../../slice/playerSlice";
-import LoadingOverlay from "../loading/Loading";
 import { CaretRightOutlined, PauseOutlined } from "@ant-design/icons";
 import Play from "../PlaybackStats/Play";
 import Like from "../PlaybackStats/Like";
@@ -12,8 +11,8 @@ import Repost from "../PlaybackStats/Repost";
 
 const SongItem = ({ item, user }: any) => {
   const dispatch = useDispatch();
-  const [updateplay, { isLoading: updating }] = useUpdatePlayMusicMutation();
-  const [addHistorySong, { isLoading: adding }] = useAddHistorySongMutation();
+  const [updateplay] = useUpdatePlayMusicMutation();
+  const [addHistorySong] = useAddHistorySongMutation();
   const { isPlaying, currentSong } = useSelector((state: any) => state?.player);
   const handlePlaySong = async (song: any) => {
     dispatch(playSong(song));

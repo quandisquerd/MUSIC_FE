@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Waveform from "../../util/waveform";
 import { useParams } from "react-router-dom";
 import { useGetOneMusicQuery } from "../../api/music";
-import LoadingOverlay from "../../component/loading/Loading";
 import { useEffect } from "react";
 import { playSong } from "../../slice/playerSlice";
 import Action from "../../component/MusicDetail/Action";
