@@ -8,6 +8,7 @@ import { CaretRightOutlined, PauseOutlined } from "@ant-design/icons";
 import Play from "../PlaybackStats/Play";
 import Like from "../PlaybackStats/Like";
 import Repost from "../PlaybackStats/Repost";
+import "../../util/css.scss";
 
 const SongItem = ({ item, user }: any) => {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ const SongItem = ({ item, user }: any) => {
   const [addHistorySong] = useAddHistorySongMutation();
   const { isPlaying, currentSong } = useSelector((state: any) => state?.player);
   const handlePlaySong = async (song: any) => {
+    console.log(song);
+    
     dispatch(playSong(song));
     await updateplay(song?.Music?.id);
     const data = {
@@ -22,13 +25,17 @@ const SongItem = ({ item, user }: any) => {
     };
     await addHistorySong({ data, token: user?.token });
   };
+  const loads = Array.from({ length: 6 }, (_, index) => (
+    <div
+      key={index}
+      className={`${isPlaying ? "load" : "load1"} text-white`}
+    ></div>
+  ));
   return (
     <div
       className="bg-white shadow-lg rounded-lg  justify-between h-full overflow-hidden relative group flex flex-col"
       key={item?.id}
     >
-      {/* {updating && <LoadingOverlay />}
-      {adding && <LoadingOverlay />} */}
       <img
         src={item?.Music?.image}
         alt="Track 1"
@@ -61,7 +68,19 @@ const SongItem = ({ item, user }: any) => {
             />
           )}
         </button>
+        
       </div>
+      {currentSong?.Music?.id == item?.Music?.id  ? (
+              isPlaying ? (
+                <div className="flex ml-auto mr-6 mb-40 absolute inset-0  left-5  items-center justify-center opacity-100 group-hover:opacity-0  transition-opacity">
+                  <div className="loading ml-auto text">{loads}</div>
+                </div>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
       <div className="flex items-center justify-center mt-auto pb-4">
         <Play view={item?.Music?.view} />
         <Like favorite={item?.Music?.favorite} />
