@@ -31,6 +31,9 @@ const AdminLayout: React.FC = () => {
                     <Menu.Item key={"5"}>
                         <Link to={'/admin/genre'}>List Genre</Link>
                     </Menu.Item>
+                    <Menu.Item key={"6"}>
+                        <Link to={'/admin/banner'}>Setting Banner</Link>
+                    </Menu.Item>
                 </Menu>
             </Sider>
             <Layout>

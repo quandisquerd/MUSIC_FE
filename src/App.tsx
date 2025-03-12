@@ -19,6 +19,7 @@ import Home from "./page/home/Home";
 import MusicDetail from "./page/Music/MusicDetail";
 import { decryptData } from "./util/crypto";
 import { useEffect, useState } from "react";
+import Banner from "./component/admin/Setting/Banner";
 function App() {
   const [user, setUser] = useState<any>();
   const [userDe, setUserDe] = useState<any>();
@@ -52,6 +53,9 @@ function App() {
               <Route index element={<ListGenre />} />
               <Route path="add" element={<AddGenre />} />
               <Route path="update/:id" element={<UpdateGenre />} />
+            </Route>
+            <Route path="banner" element={<Banner users={userDe}/>} >
+
             </Route>
           </Route>
           <Route path="/" element={<WebsiteLayout user={user} />}>

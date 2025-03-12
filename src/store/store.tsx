@@ -8,6 +8,7 @@ import historyApi from "../api/history";
 import playerReducer from "../slice/playerSlice"
 import musicdetailApi from "../api/musicDetail";
 import { cloudinaryApi } from "../api/uploadFile";
+import bannerApi from "../api/banner";
 
 const rootReducer = combineReducers({
   [musicApi.reducerPath]: musicApi.reducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   [historyApi.reducerPath]: historyApi.reducer,
   [musicdetailApi.reducerPath]: musicdetailApi.reducer,
   [cloudinaryApi.reducerPath] : cloudinaryApi.reducer,
+  [bannerApi.reducerPath]:bannerApi.reducer,
   player: playerReducer,
 });
 const middleReducer = [
@@ -29,6 +31,7 @@ const middleReducer = [
   historyApi.middleware,
   musicdetailApi.middleware,
   cloudinaryApi.middleware,
+  bannerApi.middleware
 ];
 export const store = configureStore({
   reducer: rootReducer,

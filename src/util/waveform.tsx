@@ -142,9 +142,8 @@ const waveform = ({ isPlaying }: any) => {
           id="image"
           src={currentSong?.Music?.image}
           alt=""
-          style={{
-            // transform: `rotate(${rotation}deg)`,
-            transformOrigin: "center", // Đảm bảo hình ảnh quay quanh tâm
+          style={{  
+            transformOrigin: "center",
           }}
           className="h-72  object-cover rounded transition-transform duration-300"
         />
