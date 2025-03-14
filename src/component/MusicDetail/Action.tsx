@@ -44,7 +44,6 @@ const Action = ({ user, data, users }: any) => {
         messageApi.error(error?.message);
       });
   };
-  console.log(users?.token, checkFavoriteSong);
   const HandleLike = () => {
     const data = {
       songId: id,

@@ -8,9 +8,7 @@ const LoadingOverlay = ({ user }: any) => {
   const HandleCancel = () => {
     cancelUpload(user?.token)
       .unwrap()
-      .then((res: any) => {
-        console.log(res);
-        
+      .then(() => {
         messageApi.success("success!");
       })
       .catch((error: any) => {

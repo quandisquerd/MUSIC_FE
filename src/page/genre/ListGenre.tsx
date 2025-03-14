@@ -75,7 +75,7 @@ const ListGenre = () => {
         messageApi.success(respon?.message);
       })
       .catch((err: any) => {
-        console.log(err);
+        messageApi.error(err?.message);
       });
   };
   return (
