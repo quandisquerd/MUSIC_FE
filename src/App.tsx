@@ -2,6 +2,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  useNavigate,
 } from "react-router-dom";
 import AdminLayout from "./layout/AdminLayout";
 import Dashboard from "./component/admin/Dashboard";
@@ -24,7 +25,7 @@ function App() {
   const [user, setUser] = useState<any>();
   const [userDe, setUserDe] = useState<any>();
   const userString = localStorage.getItem("user");
-  useEffect(()=>{
+  useEffect(() => {
     if (userString) {
       const user = JSON.parse(userString);
       setUser(user);
@@ -34,48 +35,76 @@ function App() {
     } else {
       // Xử lý khi không có dữ liệu user
     }
-  },[])
-
+  }, []);
 
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="list">
-              <Route index element={<List />} />
-              <Route path=":id/edit" element={<Edit />} />
-              <Route path="add" element={<Add />} />
+        <AuthRoutes user={user} users={userDe}>
+          <Routes>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="list">
+                <Route index element={<List />} />
+                <Route path=":id/edit" element={<Edit />} />
+                <Route path="add" element={<Add />} />
+              </Route>
+              <Route path="genre">
+                <Route index element={<ListGenre />} />
+                <Route path="add" element={<AddGenre />} />
+                <Route path="update/:id" element={<UpdateGenre />} />
+              </Route>
+              <Route path="banner" element={<Banner users={userDe} />}></Route>
             </Route>
-            <Route path="genre">
-              <Route index element={<ListGenre />} />
-              <Route path="add" element={<AddGenre />} />
-              <Route path="update/:id" element={<UpdateGenre />} />
+            <Route path="/" element={<WebsiteLayout user={user} />}>
+              <Route index element={<Home user={user} />} />
+              {/* <Route path="/test" element={<Test />} /> */}
+              <Route path="music">
+                <Route
+                  path=":id"
+                  element={<MusicDetail user={userDe} users={user} />}
+                />
+              </Route>
+              {/* <Route path=":id" element={<MusicDetail />} /> */}
             </Route>
-            <Route path="banner" element={<Banner users={userDe}/>} >
-
-            </Route>
-          </Route>
-          <Route path="/" element={<WebsiteLayout user={user} />}>
-            <Route index element={<Home user={user} />} />
-            {/* <Route path="/test" element={<Test />} /> */}
-            <Route path="music">
-              <Route
-                path=":id"
-                element={<MusicDetail user={userDe} users={user} />}
-              />
-            </Route>
-            {/* <Route path=":id" element={<MusicDetail />} /> */}
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/upload" element={<AddMusic user={user} users={userDe}/>} />
-        </Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/upload"
+              element={<AddMusic user={user} users={userDe} />}
+            />
+          </Routes>
+        </AuthRoutes>
       </Router>
     </>
   );
 }
+function AuthRoutes({
+  user,
+  children,
+  users
+}: {
+  user: any;
+  children: React.ReactNode;
+  users:any
+}) {
+  const navigate = useNavigate();
+  console.log(users);
+  
+  useEffect(() => {
+    if (user == undefined || user == null) {
+      navigate("/login");
+    } else if (user) {
+      if(users?.role ==0){
+        navigate("/admin");
+      }else{
+        navigate("/");
+      }
+      
+    }
+  }, [user]);
 
+  return <>{children}</>;
+}
 export default App;

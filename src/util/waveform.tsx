@@ -9,16 +9,10 @@ const waveform = ({ isPlaying }: any) => {
   const { currentSong, currentTime, duration } = useSelector(
     (state: any) => state.player
   );
-
-  const [rotation, setRotation] = useState(0);
-  console.log(rotation);
-
   useEffect(() => {
     let frameId: any;
-
     const rotate = () => {
       if (isPlaying) {
-        setRotation((prevRotation) => prevRotation + 1);
         frameId = requestAnimationFrame(rotate);
       }
     };

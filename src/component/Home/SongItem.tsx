@@ -16,8 +16,6 @@ const SongItem = ({ item, user }: any) => {
   const [addHistorySong] = useAddHistorySongMutation();
   const { isPlaying, currentSong } = useSelector((state: any) => state?.player);
   const handlePlaySong = async (song: any) => {
-    console.log(song);
-    
     dispatch(playSong(song));
     await updateplay(song?.Music?.id);
     const data = {

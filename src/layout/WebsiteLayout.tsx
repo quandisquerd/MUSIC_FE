@@ -1,12 +1,21 @@
-import { Link, Outlet } from "react-router-dom";
-import { BellOutlined, MailOutlined, MenuOutlined } from "@ant-design/icons";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import {
+  BellOutlined,
+  HeartOutlined,
+  LogoutOutlined,
+  MailOutlined,
+  MenuOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import MusicPlayerBar from "../component/barbotton/BarBotton";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import { useSelector } from "react-redux";
 import { decryptData } from "../util/crypto";
 import { useEffect, useState } from "react";
 
 const WebsiteLayout = ({ user }: any) => {
+  const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage();
   const [userDe, setuserDe] = useState<any>();
   useEffect(() => {
     if (user) {
@@ -15,10 +24,18 @@ const WebsiteLayout = ({ user }: any) => {
       setuserDe(userDe);
     }
   }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    messageApi.success("Bạn đã đăng xuất!");
+    setTimeout(() => {
+      navigate("/login");
+    }, 1000);
+  };
 
   const { currentSong } = useSelector((state: any) => state?.player);
   return (
     <>
+      {contextHolder}
       <header className=" fixed top-0 left-0 right-0 z-50  bg-black ">
         <div className="flex items-center justify-between bg-gray-800 px-4  text-white mr-32 ml-32">
           <div className="flex items-center space-x-4">
@@ -68,17 +85,63 @@ const WebsiteLayout = ({ user }: any) => {
               <Link to="/upload" className="hover:text-gray-400 px-2 py-2">
                 Upload
               </Link>
-              <div className="relative px-2">
+              <div className="relative px-2 group">
                 <img
                   src={
                     userDe?.avatar
-                      ? userDe?.avatar
+                      ? userDe.avatar
                       : "https://cdn2.fptshop.com.vn/small/avatar_trang_1_cd729c335b.jpg"
                   }
                   alt="User Avatar"
-                  className="h-6 w-6 rounded-full "
+                  className="h-6 w-6 rounded-full cursor-pointer"
                 />
+                <div className="absolute left-0 mt-2 w-40 p-2 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
+                  <div className="border-2 p-2 rounded flex items-center">
+                    <img
+                      src={
+                        userDe?.avatar
+                          ? userDe.avatar
+                          : "https://cdn2.fptshop.com.vn/small/avatar_trang_1_cd729c335b.jpg"
+                      }
+                      alt="User Avatar"
+                      className="h-8 w-8 rounded-full cursor-pointer"
+                    />
+                    <div>
+                      <span className="text-black ml-1 text-sm font-bold font-mono mb-1">
+                        {userDe?.username}
+                      </span>
+                      <div className="h-1 w-1 ml-1 rounded-full cursor-pointer bg-green-500 text-black flex items-center" ><p className="ml-2 mb-1 font-sans text-green-500">active</p></div>
+                    </div>
+                  </div>
+                  <button className=" flex items-center w-full text-left px-2 py-2 text-sm text-black hover:bg-gray-100">
+                    <UserOutlined className="mr-2 " />
+                    Profile
+                  </button>
+                  <button
+                    // onClick={handleLogout}
+                    className=" flex items-center w-full text-left px-2 py-2 text-sm text-black hover:bg-gray-100"
+                  >
+                    <HeartOutlined className="mr-2" />
+                    Like
+                  </button>
+                  <button
+                    // onClick={handleLogout}
+                    className=" flex items-center w-full text-left px-2 py-2 text-sm text-black hover:bg-gray-100"
+                  >
+                    <HeartOutlined className="mr-2" />
+                    Like
+                  </button>
+
+                  <button
+                    onClick={() => handleLogout()}
+                    className=" flex items-center w-full text-left px-2 py-2 text-sm text-red-600 hover:bg-gray-100"
+                  >
+                    <LogoutOutlined className="mr-2" />
+                    Logout
+                  </button>
+                </div>
               </div>
+
               <button className="hover:text-white">
                 <BellOutlined className="text-sm px-2 py-2" />
               </button>

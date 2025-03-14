@@ -48,7 +48,6 @@ const AddInfoMusic = ({ filename, user, file,users }: any) => {
     addMusic({ data, token: user?.token })
       .unwrap()
       .then((res: any) => {
-        console.log(res);
         messageApi.success(res?.message);
         setTimeout(() => {
           navigate("/");

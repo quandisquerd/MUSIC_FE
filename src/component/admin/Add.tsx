@@ -34,7 +34,6 @@ const Add: React.FC = () => {
         return e && e.fileList;
     };
     const handleUploadImage = async ({ file }: any) => {
-        console.log(file);
         const cloud_name = 'dw6wgytc3';
         const preset_name = 'demo_upload';
         const folder_name = 'NODEJS';
@@ -54,7 +53,6 @@ const Add: React.FC = () => {
 
     }
     const handleUploadFile = async ({ file }: any) => {
-        console.log(file);
         const cloud_name = 'dw6wgytc3';
         const preset_name = 'demo_upload';
         const folder_name = 'NODEJS';

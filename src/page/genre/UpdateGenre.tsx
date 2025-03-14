@@ -14,8 +14,6 @@ const UpdateGenre = () => {
   const navigate = useNavigate();
   const [updateGenre, { isLoading: updating }] = useUpdateGenreMutation();
   const { data: genre, isLoading } = useGetOneGenreQuery(id);
-  console.log(genre);
-
   const [name, setname] = useState<any>();
   useEffect(() => {
     if (genre?.data?.name) {

@@ -5,12 +5,11 @@ import Hls from "hls.js";
 
 const WaveFormMini = ({ status, onCurrentTime, onDuration }: any) => {
   const dispatch = useDispatch();
-  const { currentSong, playlist } = useSelector((state: any) => state.player);
+  const { currentSong } = useSelector((state: any) => state.player);
   const audioRef: any = useRef(null);
   const [currentTime, setLocalCurrentTime] = useState(0);
   const [duration, setLocalDuration] = useState(0);
   const progressRef: any = useRef(null);
-  console.log(playlist);
   
   useEffect(() => {
     if (Hls.isSupported()) {

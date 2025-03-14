@@ -28,21 +28,14 @@ const UploadMusic = ({ user, users }: any) => {
   const handleBeforeUpload = (file: any) => {
     const formData = new FormData();
     formData.append("audio", file);
-
-    // Gọi API upload từ Redux Toolkit Query
     uploadfile({ formData, token: user?.token })
       .unwrap()
       .then((response) => {
         setUploadedFiles(response?.playlistUrl);
-        // message.success('File uploaded successfully!');
-        console.log("Upload response:", response);
       })
       .catch((err) => {
-        // message.error('Upload failed');
         console.error("Upload error:", err);
       });
-
-    // Trả về false để ngừng hành động upload mặc định của Ant Design
     return false;
   };
 
