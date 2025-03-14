@@ -3,7 +3,7 @@ import "./css.scss";
 import { formatTime } from "./formatTime";
 import { useDispatch, useSelector } from "react-redux";
 import { togglePlayPause } from "../slice/playerSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 const waveform = ({ isPlaying }: any) => {
   const dispatch = useDispatch();
   const { currentSong, currentTime, duration } = useSelector(
