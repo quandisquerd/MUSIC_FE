@@ -10,9 +10,8 @@ const Like = ({ user }: any) => {
     useGetAllFavoriteWithUserQuery(user?.token);
   return (
     <>
-      {/* {favoriting && <LoadingOverlay />} */}
-      <div className="mt-8">
-        <h3 className="text-xl font-semibold mb-4">
+      <div className="mt-8 mb-10">
+        <h3 className="text-sl font-semibold mb-4">
           {ListFavoriteUser?.data?.length} Likes
         </h3>
         {favoriting && <LoadingUser />}
@@ -30,8 +29,8 @@ const Like = ({ user }: any) => {
                 />
                 <div>
                   <p className="font-semibold text-sl">
-                    {item?.Music?.name?.length > 25
-                      ? item?.Music?.name.slice(0) + `...`
+                    {item?.Music?.name?.length > 20
+                      ? item?.Music?.name.slice(0,20) + `...`
                       : item?.Music?.name}
                   </p>
                   <p className="text-sl text-gray-500">

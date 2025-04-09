@@ -49,12 +49,12 @@ const Banner = () => {
     const interval = setInterval(() => {
       setDescriptionIndex((prev) => {
         const words = datas[index]?.description?.split(" ") || [];
-        return prev + 10 < words.length ? prev + 10 : 0; // Reset về 0 khi hết từ
+        return prev + 15 < words.length ? prev + 15 : 0; 
       });
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [index, datas]); // Chạy lại khi đổi slide
+  }, [index, datas]);
 
   const getWordsByIndex = (text: string, startIndex: number, count: number) => {
     const words = text.split(" ");
@@ -75,7 +75,7 @@ const Banner = () => {
     ></div>
   ));
   return (
-    <div className="relative w-full h-[400px] overflow-hidden rounded-2xl group">
+    <div className="relative w-full h-[400px] overflow-hidden rounded-2xl group mt-8">
       <AnimatePresence>
         {datas && datas.length > 0 && (
           <motion.div

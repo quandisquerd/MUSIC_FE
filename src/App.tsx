@@ -90,7 +90,6 @@ function AuthRoutes({
   users:any
 }) {
   const navigate = useNavigate();
-  console.log(users);
   
   useEffect(() => {
     if (user == undefined || user == null) {

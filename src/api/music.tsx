@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { pause } from "../util/pause";
 const API = import.meta.env.VITE_API_URL;
 
 const musicApi = createApi({
@@ -7,6 +8,7 @@ const musicApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: API,
     fetchFn: async (...args) => {
+      pause(2000)
       return fetch(...args);
     },
   }),

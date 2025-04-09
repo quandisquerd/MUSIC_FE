@@ -14,7 +14,6 @@ import { useState } from "react";
 import { useAddCommentMutation } from "../../api/musicDetail";
 import { useParams } from "react-router-dom";
 import { message } from "antd";
-import LoadingDiv from "../loading/LoadingDiv";
 import {
   useAddFavoriteSongMutation,
   useCheckFavoriteSongWithUserQuery,
@@ -23,17 +22,19 @@ import {
 
 const Action = ({ user, data, users }: any) => {
   const [messageApi, contextHolder] = message.useMessage();
+  const [clicked, setClicked] = useState(false);
   const { id } = useParams();
   const [value, setValue] = useState<any>();
-  const [cmt, { isLoading }] = useAddCommentMutation();
-  const [addFavorite] = useAddFavoriteSongMutation();
-  const { data: checkFavoriteSong, isLoading: checking } =
-    useCheckFavoriteSongWithUserQuery({
-      id: id,
-      token: users?.token,
-    });
-  const [removeFavorite] = useRemoveFavoriteSongMutation();
+  const [cmt, { isLoading: cmting }] = useAddCommentMutation();
+  const [addFavorite, { isLoading: adding }] = useAddFavoriteSongMutation();
+  const { data: checkFavoriteSong } = useCheckFavoriteSongWithUserQuery({
+    id: id,
+    token: users?.token,
+  });
+  const [removeFavorite, {isLoading:removing}] = useRemoveFavoriteSongMutation();
   const HandleComment = () => {
+    if (clicked || cmting) return;
+    setClicked(true);
     cmt({ data: { title: value, songid: id }, token: users?.token })
       .unwrap()
       .then((res: any) => {
@@ -42,9 +43,14 @@ const Action = ({ user, data, users }: any) => {
       })
       .catch((error) => {
         messageApi.error(error?.message);
+      })
+      .finally(() => {
+        setClicked(false);
       });
   };
   const HandleLike = () => {
+    if (clicked || adding) return;
+    setClicked(true);
     const data = {
       songId: id,
     };
@@ -54,22 +60,29 @@ const Action = ({ user, data, users }: any) => {
       })
       .catch((error: any) => {
         messageApi.error(error?.data?.message);
+      })
+      .finally(() => {
+        setClicked(false);
       });
   };
   const HandleUnLike = () => {
+    if (clicked || removing) return;
+    setClicked(true);
     removeFavorite({ id: id, token: users?.token })
       .then((res: any) => {
         messageApi.success(res?.data?.message);
       })
       .catch((error: any) => {
         messageApi.error(error?.data?.message);
+      })
+      .finally(() => {
+        setClicked(false);
       });
   };
   return (
     <div className="flex">
       {contextHolder}
-      {isLoading && <LoadingDiv />}
-      {checking && <LoadingDiv />}
+
       <div className="w-4/5 p-4 border bg-white ">
         <div className="flex items-center justify-center mb-4">
           <img
