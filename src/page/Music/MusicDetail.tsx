@@ -6,9 +6,9 @@ import { useEffect } from "react";
 import { playSong } from "../../slice/playerSlice";
 import Action from "../../component/MusicDetail/Action";
 import LoadingDiv from "../../component/loading/LoadingDiv";
+import LoadingCmt from "../../component/loading/LoadingCmt";
 
-
-const MusicDetail = ({user,users}:any) => {
+const MusicDetail = ({ user, users }: any) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { data: musicdetail, isLoading: musicing } = useGetOneMusicQuery(id);
@@ -23,13 +23,15 @@ const MusicDetail = ({user,users}:any) => {
   }, [currentSong, musicdetail?.data, dispatch]);
 
   return (
-    <div className="mr-32 ml-32">
-      {musicing && <LoadingDiv />}
-      <div className=" mt-12 max-w-full text-xs font-bold bg-white text-white  items-center justify-center">
-        <Waveform isPlaying={isPlaying} />
+    <>
+      {musicing && <LoadingCmt />}
+      <div className="mr-32 ml-32">
+        <div className=" mt-12 max-w-full text-xs font-bold bg-white text-white  items-center justify-center">
+          <Waveform isPlaying={isPlaying} />
+        </div>
+        <Action user={user} users={users} data={musicdetail?.data} />
       </div>
-      <Action user={user}  users={users} data={musicdetail?.data}/>
-    </div>
+    </>
   );
 };
 

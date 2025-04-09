@@ -4,7 +4,12 @@ import WaveFormMini from "../waveform/WaveFormMini";
 import { formatTime } from "../../util/formatTime";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { togglePlayPause, nextSong, prevSong, setDuration } from "../../slice/playerSlice";
+import {
+  togglePlayPause,
+  nextSong,
+  prevSong,
+  setDuration,
+} from "../../slice/playerSlice";
 import {
   useAddFavoriteSongMutation,
   useCheckFavoriteSongWithUserQuery,
@@ -26,28 +31,28 @@ import {
 
 const MusicPlayerBar = memo(({ user }: any) => {
   const dispatch = useDispatch();
-
+  const [clicked, setClicked] = useState(false);
   const { currentSong, isPlaying } = useSelector((state: any) => state?.player);
   const [messageApi, contextHolder] = message.useMessage();
-  const { data: checkFavoriteSong } =
-    useCheckFavoriteSongWithUserQuery({
-      id: currentSong?.Music?.id,
-      token: user?.token,
-    });
+  const { data: checkFavoriteSong } = useCheckFavoriteSongWithUserQuery({
+    id: currentSong?.Music?.id,
+    token: user?.token,
+  });
 
-  const [addFavorite] = useAddFavoriteSongMutation();
+  const [addFavorite, { isLoading: adding }] = useAddFavoriteSongMutation();
   const [removeFavorite] = useRemoveFavoriteSongMutation();
   const [currentTimes, setCurrentTime] = useState();
   const [durations, setDurations] = useState();
   const Duration = (value: any) => {
-    dispatch(setDuration(value))
+    dispatch(setDuration(value));
     setDurations(value);
   };
   const Current = (value: any) => {
     setCurrentTime(value);
-   
   };
   const HandleLike = () => {
+    if (clicked || adding) return;
+    setClicked(true);
     const data = {
       songId: currentSong?.Music?.id,
     };
@@ -57,15 +62,23 @@ const MusicPlayerBar = memo(({ user }: any) => {
       })
       .catch((error: any) => {
         messageApi.error(error?.data?.message);
+      })
+      .finally(() => {
+        setClicked(false);
       });
   };
   const HandleUnLike = () => {
+    if (clicked || adding) return;
+    setClicked(true);
     removeFavorite({ id: currentSong?.Music?.id, token: user?.token })
       .then((res: any) => {
         messageApi.success(res?.data?.message);
       })
       .catch((error: any) => {
         messageApi.error(error?.data?.message);
+      })
+      .finally(() => {
+        setClicked(false);
       });
   };
 
@@ -103,7 +116,7 @@ const MusicPlayerBar = memo(({ user }: any) => {
             <span className="text-sm text-orange-500">
               {formatTime(currentTimes ? currentTimes : 0)}
             </span>
-            
+
             <WaveFormMini
               status={isPlaying}
               onDuration={Duration}
@@ -129,7 +142,9 @@ const MusicPlayerBar = memo(({ user }: any) => {
                     {currentSong?.User?.username}
                   </p>
                   <p className="text-xs text-gray-600">
-                  {currentSong?.Music?.name?.length > 20 ? currentSong?.Music?.name?.slice(0,20) : currentSong?.Music?.name }
+                    {currentSong?.Music?.name?.length > 20
+                      ? currentSong?.Music?.name?.slice(0, 20)
+                      : currentSong?.Music?.name}
                   </p>
                 </div>
               </div>

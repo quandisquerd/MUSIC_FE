@@ -8,7 +8,7 @@ const ArtistsYouShouldFollow = ({ user }: any) => {
   );
 
   return (
-    <>
+    <div className="mt-8">
       <div className="flex items-center justify-center mb-4">
         <h2 className="text-sl font-semibold ">Artists You Should Follow</h2>
         <button className="ml-auto ">Refresh list</button>
@@ -19,7 +19,7 @@ const ArtistsYouShouldFollow = ({ user }: any) => {
           return <TopUser item={item} user={user} key={item?.id} />;
         })}
       </ul>
-    </>
+    </div>
   );
 };
 

@@ -26,7 +26,7 @@ const waveform = ({ isPlaying }: any) => {
     return () => cancelAnimationFrame(frameId);
   }, [isPlaying]);
   const loads = Array.from({ length: 6 }, (_, index) => (
-    <div key={index} className={`${isPlaying ? "load" : "load1"}`}></div>
+    <div key={index} className={`${isPlaying ? "load" : "load10"}`}></div>
   ));
   return (
     <div className="flex p-3 rounded-lg shadow-lg mb-5">
@@ -63,13 +63,11 @@ const waveform = ({ isPlaying }: any) => {
           </div>
           {isPlaying ? (
             <div className="flex ml-auto mr-6 mb-12">
-                <div className="loading ml-auto">{loads}</div>
+              <div className="loading ml-auto">{loads}</div>
             </div>
           ) : (
             <div className="flex ml-auto mr-6 mb-12">
-              <div className="loading ml-auto">
               <div className="loading ml-auto">{loads}</div>
-              </div>
             </div>
           )}
           <div className="flex-2 items-center">
@@ -136,7 +134,7 @@ const waveform = ({ isPlaying }: any) => {
           id="image"
           src={currentSong?.Music?.image}
           alt=""
-          style={{  
+          style={{
             transformOrigin: "center",
           }}
           className="h-72  object-cover rounded transition-transform duration-300"
