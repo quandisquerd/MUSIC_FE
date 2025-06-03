@@ -2,7 +2,7 @@ import { HeartOutlined } from '@ant-design/icons'
 
 const CmtDetail = ({item}:any) => {
   return (
-    <div className="flex  mt-8 items-start">
+    <div className="flex  mt-8 items-start select-none">
         <div className="w-1/12 flex flex-col justify-start">
           <img
             src={item?.User?.avatar ? item?.User?.avatar:"https://cdn2.fptshop.com.vn/small/avatar_trang_1_cd729c335b.jpg"}

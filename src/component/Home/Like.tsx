@@ -10,7 +10,7 @@ const Like = ({ user }: any) => {
     useGetAllFavoriteWithUserQuery(user?.token);
   return (
     <>
-      <div className="mt-8 mb-10">
+      <div className="mt-8 mb-10 select-none">
         <h3 className="text-sl font-semibold mb-4">
           {ListFavoriteUser?.data?.length} Likes
         </h3>

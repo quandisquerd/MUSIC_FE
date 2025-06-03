@@ -97,7 +97,7 @@ const WaveFormMini = ({ status, onCurrentTime, onDuration }: any) => {
     dispatch(setCurrentTime(newTime));
   };
   return (
-    <div style={{ width: "100%", position: "relative" }} className="group h-10 flex items-center justify-center">
+    <div style={{ width: "100%", position: "relative" }} className="group h-10 flex items-center justify-center select-none">
       <div
         ref={progressRef}
         onClick={handleProgressClick}

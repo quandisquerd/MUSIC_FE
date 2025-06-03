@@ -19,7 +19,7 @@ const Morelike = ({ user }: any) => {
 
   return (
     <>
-      <div className=" mt-10 flex items-center">
+      <div className=" mt-10 flex items-center select-none">
         <h2 className="text-xl font-semibold mb-4 ">More of what you like</h2>
         <Link to="test" className="ml-auto">
           see all

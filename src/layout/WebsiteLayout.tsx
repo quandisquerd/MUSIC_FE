@@ -52,7 +52,7 @@ const WebsiteLayout = ({ user }: any) => {
   return (
     <>
       {contextHolder}
-      <header className=" fixed top-0 left-0 right-0 z-50  bg-black ">
+      <header className=" fixed top-0 left-0 right-0 z-50  bg-black select-none ">
         <div className="flex items-center justify-between bg-gray-800 px-4  text-white mr-32 ml-32">
           <div className="flex items-center space-x-4">
             <img

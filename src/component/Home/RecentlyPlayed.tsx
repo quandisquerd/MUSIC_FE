@@ -19,7 +19,7 @@ const RecentlyPlayed = ({ user }: any) => {
   }, [listenhistory?.data, dispatch]);
   return (
     <>
-      <div className=" mt-10 flex items-center">
+      <div className=" mt-10 flex items-center select-none">
         <h2 className="text-xl font-semibold mb-4 ">Recently Played</h2>
         <Link to="test" className="ml-auto">
           see all

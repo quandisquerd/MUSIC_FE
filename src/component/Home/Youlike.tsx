@@ -8,7 +8,7 @@ const Youlike = ({ user }: any) => {
 
   return (
     <div>
-      <div className=" mt-10 flex items-center">
+      <div className=" mt-10 flex items-center select-none">
         <h2 className="text-xl font-semibold mb-4 ">You may also like</h2>
         <Link to="test" className="ml-auto">
           see all
