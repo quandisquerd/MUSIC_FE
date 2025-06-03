@@ -36,7 +36,7 @@ const TopUser = ({ item, user }: any) => {
   return (
     <li
       key={item?.id}
-      className="flex items-center space-x-4 p-2 bg-white rounded-lg shadow-lg w-full"
+      className="flex items-center space-x-4 p-2 bg-white rounded-lg shadow-lg w-full select-none"
     >
       {contextHolder}
       <div className="flex items-center space-x-4 flex-grow">

@@ -86,7 +86,7 @@ const MusicPlayerBar = memo(({ user }: any) => {
     <>
       {/* {checking && <LoadingOverlay />} */}
       {contextHolder}
-      <div className=" fixed bottom-0 left-0 right-0 z-50 bg-gray-200   px-4  text-black border-t shadow-lg">
+      <div className=" fixed bottom-0 left-0 right-0 z-50 bg-gray-200   px-4  text-black border-t shadow-lg select-none">
         <div className="ml-32 mr-32 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <StepBackwardOutlined

@@ -5,7 +5,7 @@ import { useGetOneMusicQuery } from "../../api/music";
 import { useEffect } from "react";
 import { playSong } from "../../slice/playerSlice";
 import Action from "../../component/MusicDetail/Action";
-import LoadingDiv from "../../component/loading/LoadingDiv";
+
 import LoadingCmt from "../../component/loading/LoadingCmt";
 
 const MusicDetail = ({ user, users }: any) => {
@@ -25,7 +25,7 @@ const MusicDetail = ({ user, users }: any) => {
   return (
     <>
       {musicing && <LoadingCmt />}
-      <div className="mr-32 ml-32">
+      <div className="mr-32 ml-32 select-none">
         <div className=" mt-12 max-w-full text-xs font-bold bg-white text-white  items-center justify-center">
           <Waveform isPlaying={isPlaying} />
         </div>

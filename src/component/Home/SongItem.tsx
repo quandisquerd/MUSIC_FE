@@ -31,7 +31,7 @@ const SongItem = ({ item, user }: any) => {
   ));
   return (
     <div
-      className="bg-white shadow-lg rounded-lg  justify-between h-full overflow-hidden relative group flex flex-col"
+      className="bg-white shadow-lg rounded-lg  justify-between h-full overflow-hidden relative group flex flex-col select-none"
       key={item?.id}
     >
       <img

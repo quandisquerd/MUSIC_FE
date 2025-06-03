@@ -80,7 +80,7 @@ const Action = ({ user, data, users }: any) => {
       });
   };
   return (
-    <div className="flex">
+    <div className="flex select-none">
       {contextHolder}
 
       <div className="w-4/5 p-4 border bg-white ">

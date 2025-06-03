@@ -75,7 +75,7 @@ const Banner = () => {
     ></div>
   ));
   return (
-    <div className="relative w-full h-[400px] overflow-hidden rounded-2xl group mt-8">
+    <div className="relative w-full h-[400px] overflow-hidden rounded-2xl group mt-8 select-none">
       <AnimatePresence>
         {datas && datas.length > 0 && (
           <motion.div
